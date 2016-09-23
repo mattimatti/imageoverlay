@@ -1,11 +1,8 @@
 {
   "name": "imageoverlay",
   "version": "0.0.1",
-  "description": "",
+  "description": "Simple command line utility to apply watermarks on images",
   "main": "daemon.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/mattimatti/imageoverlay.git"
@@ -13,9 +10,9 @@
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mattimatti/miniwebapp/issues"
+    "url": "https://github.com/mattimatti/imageoverlay/issues"
   },
-  "homepage": "https://github.com/mattimatti/miniwebapp",
+  "homepage": "https://github.com/mattimatti/imageoverlay",
   "devDependencies": {
     "docco": "^0.7.0",
     "grunt": "^0.4.5",
@@ -39,7 +36,6 @@
     "config": "^1.20.4",
     "crypto": "0.0.3",
     "file-exists": "^1.0.0",
-    "file-stream-rotator": "0.0.6",
     "fs-extra": "^0.30.0",
     "glob": "^7.0.3",
     "mkdirp": "^0.5.1",
@@ -47,7 +43,6 @@
     "sharp": "^0.16.0",
     "underscore": "^1.8.3",
     "underscore.deferred": "^0.4.0",
-    "underscore.string": "^3.3.4",
-    "winston": "^2.2.0"
+    "underscore.string": "^3.3.4"
   }
 }

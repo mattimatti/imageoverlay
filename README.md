@@ -1,11 +1,14 @@
 # imgoverlay
 Simple command line utility to apply watermarks on images
 
-
-
-To daemonize the app:
-
 ```shell
+npm install mattimatti/imageoverlay
+```
+
+
+To daemonize the app use pm2:
+
+
 npm install pm2 -g
 ```
 
