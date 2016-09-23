@@ -12,7 +12,7 @@ module.exports = function(grunt) {
       options: {
         commit: true,
         commitMessage: 'Release v%VERSION%',
-        commitFiles: ['package.json', 'TODO.md', 'CHANGELOG.md'],
+        commitFiles: ['package.json'],
         createTag: true,
         tagName: 'v%VERSION%',
         tagMessage: 'Version %VERSION%',
@@ -95,10 +95,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-jsonlint');
 
   // Default task.
-  grunt.registerTask('default', ['jshint', 'nodeunit']);
+  grunt.registerTask('default', ['jshint']);
   grunt.registerTask('prepare', ['jshint', 'todo', ]);
-  grunt.registerTask('release', ['bump-only:minor', 'commit']);
-  grunt.registerTask('patch', ['bump-only:patch', 'commit']);
+  //grunt.registerTask('release', ['bump-only:minor', 'commit']);
+  //grunt.registerTask('patch', ['bump-only:patch', 'commit']);
 
 
   grunt.registerTask('build', ['default', 'prepare', 'bump']);
