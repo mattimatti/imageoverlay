@@ -3,17 +3,16 @@ Simple command line utility to apply watermarks on images
 
 
 
+To daemonize the app:
+
 ```shell
-npm install gpm2 --save-dev
+npm install pm2 -g
 ```
-
-
 
 
 ```shell
 pm2 start daemon.js --watch
 ```
-
 
 
 ```shell
