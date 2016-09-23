@@ -1,0 +1,51 @@
+{
+	"workfolder": "./test",
+	"baseUrl": "http://fluidfashion.mini.local:8081",
+	"server": {
+		"port": 8081
+	},
+	"winston": {
+		"default": {
+			"console": {
+				"colorize": true,
+				"handleExceptions": true,
+				"json": false,
+				"level": "silly",
+				"label": "default"
+			},
+			"file": {
+				"filename": "/tmp/default.log",
+				"level": "silly",
+				"json": false,
+				"handleExceptions": true
+			}
+		}
+	},
+	"database": {
+		"host": "localhost",
+		"user": "mini",
+		"password": "minipass",
+		"database": "mini"
+	},
+	"facebook": {
+		"appid": "1726229330998270",
+		"caption": "MINI FLUID FASHION",
+		"title": "MINI FLUID FASHION",
+		"description": "#thegifbooth"
+	},
+	"dem": {
+		"from": "'MINI' <fluidfashion@mini.it>",
+		"to": "mmonti@gmail.com, mmonti@gmail.com",
+		"subject": "MINI dev",
+		"baseUrl": "http://fluidfashion.mini.local:8081",
+		"mainThumbnail": "http://fluidfashion.mini.it/assets/images/dem_r3_c2.gif",
+		"profileUrl": "http://fluidfashion.mini.local:8081",
+		"text": "",
+		"filename": "./src/view/dem.html",
+		"mp4filename": "./src/view/mp4.html"
+	},
+	"mp4mail": {
+		"text": "Salva il video in allegato e condividilo in instagram",
+		"filename": "'fluidfashion-mini.mp4'"
+	}
+}
