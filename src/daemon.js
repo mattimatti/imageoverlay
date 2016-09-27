@@ -1,6 +1,5 @@
 var fs = require('fs-extra');
 var mkdirp = require('mkdirp');
-var config = require('config');
 var WatchFolder = require('./daemon/watchfolder.js');
 var MediaConverter = require('./daemon/mediaconverter.js');
 var Repo = require('./daemon/repo.js');
@@ -16,7 +15,8 @@ var WIPE = false;
 
 // get the cueernt folder
 //var WORKFOLDER = path.join(__dirname, "./../");
-var WORKFOLDER = path.dirname(require.main.filename);
+//var WORKFOLDER = path.dirname(require.main.filename);
+var WORKFOLDER = process.cwd();
 
 if (DEBUG) {
     WORKFOLDER = path.join(__dirname, "./test/");
@@ -102,7 +102,7 @@ wf.on('folderIsReady', function(mypath, watcher) {
         watcher.close();
     }
 
-    mc = new MediaConverter(mypath);
+    mc = new MediaConverter(WORKFOLDER,mypath);
     mc.on('converted', function() {
         // move the folder to done.
 

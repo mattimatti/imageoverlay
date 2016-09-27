@@ -10,14 +10,13 @@ var EventEmitter = events.EventEmitter;
 var _s = require("underscore.string");
 _.mixin(_s.exports());
 var sharp = require('sharp');
-var config = require('config');
 
 
 var MediaConverter = function(WORKFOLDER,path) {
 
 
 
-    var watermarkPath = oPath.join(WORKFOLDER, config.get('watermark')) ;
+    var watermarkPath = oPath.join(WORKFOLDER, "watermark.png") ;
     console.log(watermarkPath);
 
 
