@@ -12,12 +12,11 @@ _.mixin(_s.exports());
 var sharp = require('sharp');
 
 
-var MediaConverter = function(WORKFOLDER,path) {
+var MediaConverter = function(WORKFOLDER,path,watermarkPath) {
 
 
 
-    var watermarkPath = oPath.join(WORKFOLDER, "watermark.png") ;
-    console.log(watermarkPath);
+   
 
 
     EventEmitter.call(this);

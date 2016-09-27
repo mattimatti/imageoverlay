@@ -11,6 +11,7 @@ var DEBUG = false;
 var WIPE = false;
 
 
+var INSTALLFOLDER = path.join(__dirname, "./../");
 
 
 // get the current folder
@@ -22,10 +23,14 @@ if (DEBUG) {
 
 // the paths
 
-var TODO_PATH = WORKFOLDER + 'todo';
-var DONE_PATH = WORKFOLDER + 'done';
-var SAMPLE_PATH = WORKFOLDER + 'sample';
+var TODO_PATH = path.join(WORKFOLDER, 'todo');
+var DONE_PATH = path.join(WORKFOLDER, 'done');
+var SAMPLE_PATH = path.join(WORKFOLDER, 'sample');
 
+var INSTALL_SAMPLE_PATH = path.join(INSTALLFOLDER, 'sample');
+
+var WATERMARK_PATH = path.join(WORKFOLDER, "watermark.png");
+var INSTALL_WATERMARK_PATH = path.join(INSTALLFOLDER, "watermark.png");
 
 // show fancy
 
@@ -37,7 +42,14 @@ console.log('');
 console.log('');
 console.log('==============================================');
 
-
+console.log('');
+console.log('INSTALLFOLDER: ' + INSTALLFOLDER);
+console.log('');
+console.log('WORKFOLDER: ' + WORKFOLDER);
+console.log('');
+console.log('WATERMARK_PATH: ' + WATERMARK_PATH);
+console.log('');
+console.log('INSTALL_WATERMARK_PATH: ' + INSTALL_WATERMARK_PATH);
 
 // Command line params
 if (process.argv[2]) {
@@ -72,21 +84,19 @@ wf.on('watcherReady', function() {
     Repo.createEmptyDir(DONE_PATH);
     Repo.createEmptyDir(SAMPLE_PATH);
 
-if (DEBUG) {
-    if (WIPE) {
-        Repo.cleanTodo(TODO_PATH, function() {
-            console.log('cleaned ' + TODO_PATH + ' mypath!');
-            Repo.cleanDone(DONE_PATH, function() {
-                console.log('cleaned ' + DONE_PATH + ' mypath!');
-                Repo.createDir(TODO_PATH, SAMPLE_PATH);
+    if (DEBUG) {
+        if (WIPE) {
+            Repo.cleanTodo(TODO_PATH, function() {
+                console.log('cleaned ' + TODO_PATH + ' mypath!');
+                Repo.cleanDone(DONE_PATH, function() {
+                    console.log('cleaned ' + DONE_PATH + ' mypath!');
+                    Repo.createDir(TODO_PATH, SAMPLE_PATH);
+                });
             });
-        });
-
-    } else {
-        Repo.createDir(TODO_PATH, SAMPLE_PATH);
+        } else {
+            Repo.createDir(TODO_PATH, SAMPLE_PATH);
+        }
     }
-    }
-
 });
 
 
@@ -102,7 +112,7 @@ wf.on('folderIsReady', function(mypath, watcher) {
         watcher.close();
     }
 
-    mc = new MediaConverter(WORKFOLDER,mypath);
+    mc = new MediaConverter(WORKFOLDER, mypath, WATERMARK_PATH);
     mc.on('converted', function() {
         // move the folder to done.
 
