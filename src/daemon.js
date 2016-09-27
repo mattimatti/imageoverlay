@@ -13,13 +13,11 @@ var WIPE = false;
 
 
 
-// get the cueernt folder
-//var WORKFOLDER = path.join(__dirname, "./../");
-//var WORKFOLDER = path.dirname(require.main.filename);
-var WORKFOLDER = process.cwd();
+// get the current folder
+var WORKFOLDER = path.join(process.cwd(), "./");
 
 if (DEBUG) {
-    WORKFOLDER = path.join(__dirname, "./test/");
+    WORKFOLDER = path.join(WORKFOLDER, "./test/");
 }
 
 // the paths
