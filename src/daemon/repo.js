@@ -1,6 +1,6 @@
 var fs = require('fs-extra');
 var uuid = require('node-uuid');
-
+var path = require('path');
 
 function cleanDone(DONE_PATH, cb) {
 	if (!cb) {
@@ -37,7 +37,7 @@ function createDir(TODO_PATH, SAMPLE_PATH) {
 
 	cleanTodo(TODO_PATH, function(err) {
 
-		var fldr_path = TODO_PATH + '\\' + guid;
+		var fldr_path = path.join(TODO_PATH, guid);
 
 		fs.mkdirs(fldr_path, function() {
 
