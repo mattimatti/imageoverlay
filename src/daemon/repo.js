@@ -29,6 +29,28 @@ function createEmptyDir(TODO_PATH) {
 }
 
 
+
+function copyDir(from, to) {
+
+	fs.mkdirs(to, function() {
+
+			if (from) {
+				fs.copy(from, to, function(err) {
+
+					if (err) {
+						return console.error(err);
+					}
+
+					console.log('successfully copied to ' + to);
+				});
+
+			}
+
+		});
+}
+
+
+
 function createDir(TODO_PATH, SAMPLE_PATH) {
 
 
@@ -64,5 +86,6 @@ module.exports = {
 	cleanDone: cleanDone,
 	cleanTodo: cleanTodo,
 	createDir: createDir,
+	copyDir: copyDir,
 	createEmptyDir: createEmptyDir
 };

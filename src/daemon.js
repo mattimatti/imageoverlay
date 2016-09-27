@@ -54,8 +54,19 @@ console.log('INSTALL_WATERMARK_PATH: ' + INSTALL_WATERMARK_PATH);
 // Command line params
 if (process.argv[2]) {
 
-    DEBUG = true;
-    if (process.argv[2] === 'wipe') {
+
+    if (process.argv[2] === 'debug') {
+        DEBUG = true;
+        console.log('');
+        console.log('                 DEBUG                   ');
+        console.log('');
+    }
+}
+
+
+if (process.argv[3]) {
+
+    if (process.argv[3] === 'wipe') {
         WIPE = true;
         console.log('');
         console.log('                 WIPE                   ');
@@ -84,7 +95,11 @@ wf.on('watcherReady', function() {
     Repo.createEmptyDir(DONE_PATH);
     Repo.createEmptyDir(SAMPLE_PATH);
 
+
     if (DEBUG) {
+
+        Repo.copyDir(INSTALL_SAMPLE_PATH, SAMPLE_PATH);
+
         if (WIPE) {
             Repo.cleanTodo(TODO_PATH, function() {
                 console.log('cleaned ' + TODO_PATH + ' mypath!');
