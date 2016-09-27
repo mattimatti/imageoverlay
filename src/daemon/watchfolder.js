@@ -89,24 +89,24 @@ var WatchFolder = function(DROPBOX_PATH, TOTAL_FILES) {
 		// check for completeness
 		if (newWatcher.files.length >= TOTAL_FILES) {
 
-			console.log('reached amount of '+ TOTAL_FILES + ' files');
+			console.log('reached amount of ' + TOTAL_FILES + ' files');
 
 
 			// check if metadata file exists
 
 			//if (fileExists(path + '/metadata.txt')) {
 
-				console.log('metadata file exists');
+			console.log('metadata file exists');
 
-				newWatcher.close();
+			newWatcher.close();
 
-				tempWatchers = _.without(tempWatchers, newWatcher);
+			tempWatchers = _.without(tempWatchers, newWatcher);
 
 
-				console.log('tempWatchers length ' + tempWatchers.length);
+			console.log('tempWatchers length ' + tempWatchers.length);
 
-				// emit event the folder is ready
-				me.emit('folderIsReady', path);
+			// emit event the folder is ready
+			me.emit('folderIsReady', path);
 
 
 

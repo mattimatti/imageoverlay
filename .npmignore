@@ -1,0 +1,14 @@
+/node_modules
+.DS_Store
+logs
+/test
+/cache
+/test/*
+.jshintrc
+/todo
+/sample
+/done
+.npmignore
+TODO.md
+watermark.png
+npm-debug.log

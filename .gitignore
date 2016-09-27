@@ -4,3 +4,4 @@ logs
 /test
 /cache
 /test/*
+npm-debug.log

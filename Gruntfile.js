@@ -12,7 +12,7 @@ module.exports = function(grunt) {
       options: {
         commit: true,
         commitMessage: 'Release v%VERSION%',
-        commitFiles: ['package.json'],
+        commitFiles: ['-a'],
         createTag: true,
         tagName: 'v%VERSION%',
         tagMessage: 'Version %VERSION%',
@@ -74,43 +74,55 @@ module.exports = function(grunt) {
     },
 
 
-    nwjs: {
-    options: {
-        platforms: ['win64'],
-        buildDir: './webkitbuilds', // Where the build version of my NW.js app is saved
-    },
-    src: ['./package.json','./src/**/*','./config/**/*.json']
-  },
-
-
-
-    changelog: {
-      test: {
+    conventionalChangelog: {
+      release: {
         options: {
-          version: require('./package.json').version
-        }
+          preset: 'jshint',
+          changelogOpts: {
+            // conventional-changelog options go here
+            preset: 'angular'
+          },
+          context: {
+            // context goes here
+          },
+          gitRawCommitsOpts: {
+            // git-raw-commits options go here
+          },
+          parserOpts: {
+            // conventional-commits-parser options go here
+          },
+          writerOpts: {
+            // conventional-changelog-writer options go here
+          }
+        },
+        src: 'CHANGELOG.md'
+      }
+    },
+
+
+    'npm-publish': {
+      options: {
+        requires: ['build'],
+        abortIfDirty: true
       }
     }
 
 
+
   });
 
-
+  grunt.loadNpmTasks('grunt-npm');
   grunt.loadNpmTasks('grunt-todo');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-bump');
   grunt.loadNpmTasks('grunt-conventional-changelog');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-jsonlint');
-  grunt.loadNpmTasks('grunt-nw-builder');
 
   // Default task.
-  grunt.registerTask('default', ['jshint']);
-  grunt.registerTask('prepare', ['jshint', 'todo', ]);
-  //grunt.registerTask('release', ['bump-only:minor', 'commit']);
-  //grunt.registerTask('patch', ['bump-only:patch', 'commit']);
+  grunt.registerTask('default', ['jshint', 'jsonlint']);
+  grunt.registerTask('prepare', ['todo', 'conventionalChangelog']);
 
-
-  grunt.registerTask('build', ['default', 'prepare', 'bump']);
+  grunt.registerTask('build', ['default', 'prepare', 'bump','npm-publish']);
 
 };

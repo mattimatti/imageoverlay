@@ -7,23 +7,25 @@ var Repo = require('./daemon/repo.js');
 var path = require('path');
 
 // Settings
+
 var DEBUG = false;
 var WIPE = false;
 
-//var WORKFOLDER = config.get('workfolder');
-
-
+// get the cueernt folder
 var WORKFOLDER = path.join(__dirname, "./../");
 
-    if(DEBUG){
-        WORKFOLDER = path.join(__dirname, "./test/");
-    }
+if (DEBUG) {
+    WORKFOLDER = path.join(__dirname, "./test/");
+}
 
+// the paths
 
 var TODO_PATH = WORKFOLDER + 'todo';
 var DONE_PATH = WORKFOLDER + 'done';
 var SAMPLE_PATH = WORKFOLDER + 'sample';
 
+
+// show fancy
 
 console.log('==============================================');
 console.log('');
@@ -33,23 +35,23 @@ console.log('');
 console.log('');
 console.log('==============================================');
 
+
+
 // Command line params
 if (process.argv[2]) {
 
     DEBUG = true;
-    if (process.argv[2] == 'wipe') {
+    if (process.argv[2] === 'wipe') {
         WIPE = true;
-console.log('');
-console.log('                 WIPE                   ');
-console.log('');
+        console.log('');
+        console.log('                 WIPE                   ');
+        console.log('');
     }
 }
 
 
 
-
-
-// the total of files to be processed.
+// the total of files to be watched in order to start.
 var TOTAL_FILES = 1;
 
 
@@ -63,27 +65,23 @@ var mc;
 // when the watcher is ready to run
 wf.on('watcherReady', function() {
 
-    console.log('watcherReady');
+    console.log('WatchFolder:watcherReady');
 
-    // only if debug is active we cleanup the dropbox folders
-    //if (DEBUG) {
+    Repo.createEmptyDir(DONE_PATH);
 
-         Repo.createEmptyDir(DONE_PATH);
-
-        if (WIPE) {
-            Repo.cleanTodo(TODO_PATH, function() {
-                console.log('cleaned ' + TODO_PATH + ' mypath!');
-                Repo.cleanDone(DONE_PATH, function() {
-                    console.log('cleaned ' + DONE_PATH + ' mypath!');
-                    Repo.createDir(TODO_PATH, SAMPLE_PATH);
-                });
+    if (WIPE) {
+        Repo.cleanTodo(TODO_PATH, function() {
+            console.log('cleaned ' + TODO_PATH + ' mypath!');
+            Repo.cleanDone(DONE_PATH, function() {
+                console.log('cleaned ' + DONE_PATH + ' mypath!');
+                Repo.createDir(TODO_PATH, SAMPLE_PATH);
             });
+        });
 
-        } else {
-            Repo.createDir(TODO_PATH, SAMPLE_PATH);
-        }
+    } else {
+        Repo.createDir(TODO_PATH, SAMPLE_PATH);
+    }
 
-   // }
 
 });
 
@@ -108,7 +106,7 @@ wf.on('folderIsReady', function(mypath, watcher) {
         console.log('Move the folder to a processed location');
         console.log('');
 
-        var done_mypath = mypath.replace('todo','done');
+        var done_mypath = mypath.replace('todo', 'done');
 
         console.log('done_mypath ' + done_mypath);
         console.log('mypath ' + mypath);
@@ -116,7 +114,7 @@ wf.on('folderIsReady', function(mypath, watcher) {
         // Move the folder to processed location
         fs.move(mypath, done_mypath, function(err) {
             if (err) {
-            	console.error(err);
+                console.error(err);
                 return;
             }
 
@@ -124,7 +122,6 @@ wf.on('folderIsReady', function(mypath, watcher) {
             console.log('Folder has been copied to ' + done_mypath);
             console.log('');
 
-            ///process.exit();
 
         });
 

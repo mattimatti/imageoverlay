@@ -1,6 +1,3 @@
-///////// USEFUL FUNCTIONS FOR DEBUG ///////////////
-
-
 var fs = require('fs-extra');
 var uuid = require('node-uuid');
 
@@ -28,7 +25,7 @@ function cleanTodo(TODO_PATH, cb) {
 
 
 function createEmptyDir(TODO_PATH) {
-fs.mkdirs(TODO_PATH, function() {});
+	fs.mkdirs(TODO_PATH, function() {});
 }
 
 
@@ -44,15 +41,15 @@ function createDir(TODO_PATH, SAMPLE_PATH) {
 
 		fs.mkdirs(fldr_path, function() {
 
-if(SAMPLE_PATH){
-			fs.copy(SAMPLE_PATH, fldr_path, function(err) {
-				
-				if (err) {
-					return console.error(err);
-				}
+			if (SAMPLE_PATH) {
+				fs.copy(SAMPLE_PATH, fldr_path, function(err) {
 
-				console.log('successfully copied to ' + fldr_path);
-			});
+					if (err) {
+						return console.error(err);
+					}
+
+					console.log('successfully copied to ' + fldr_path);
+				});
 
 			}
 

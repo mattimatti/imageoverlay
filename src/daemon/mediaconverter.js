@@ -1,8 +1,3 @@
-// encode a sequence of images into an animated gif
-
-
-// https://github.com/SleepProgger/my_ffmpeg_utils/blob/master/video2gif.bat
-
 var fs = require('fs-extra');
 var glob = require('glob');
 var fileExists = require('file-exists');
@@ -20,7 +15,7 @@ var config = require('config');
 
 var MediaConverter = function(path) {
 
-    var watermarkPath =  oPath.join(__dirname, "./../../")+config.get('watermark');
+    var watermarkPath = oPath.join(__dirname, "./../../") + config.get('watermark');
     console.log(watermarkPath);
 
 
@@ -30,41 +25,37 @@ var MediaConverter = function(path) {
 
         var job = _.Deferred();
 
-var imagePath;
-        glob(path+"/*.png", function (er, files) {
- imagePath = files[0];
+        var imagePath;
+        glob(path + "/*.png", function(er, files) {
+            imagePath = files[0];
 
 
-        console.log('watermarkImages path: ' + imagePath);
+            console.log('watermarkImages path: ' + imagePath);
 
-        var parts = oPath.parse(imagePath);
-        var imageDestPath = parts.dir + '/' + parts.name+'-done'  + parts.ext; 
+            var parts = oPath.parse(imagePath);
+            var imageDestPath = parts.dir + '/' + parts.name + '-done' + parts.ext;
 
-        
+
 
             var onDone = function(error, stdout, stderr) {
-                    job.resolve();
+                job.resolve();
             };
 
-       
-                sharp(imagePath)
-                  .overlayWith(watermarkPath, { gravity: sharp.gravity.center } )
-                  .toFile(imageDestPath, onDone);
+
+            sharp(imagePath)
+                .overlayWith(watermarkPath, {
+                    gravity: sharp.gravity.center
+                })
+                .toFile(imageDestPath, onDone);
 
 
 
-});
+        });
 
 
 
-
-
-
-
-       
         return job;
     };
-
 
 
 
