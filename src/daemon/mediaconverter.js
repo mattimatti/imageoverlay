@@ -34,7 +34,7 @@ var MediaConverter = function(WORKFOLDER, path, watermarkPath) {
         glob(pattern, function(er, files) {
 
             console.log('globbed files');
-            console.log(files);
+            console.log(arguments);
 
             if (files.length <= 0) {
                 console.error('no files found');
