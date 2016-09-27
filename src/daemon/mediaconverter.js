@@ -19,6 +19,11 @@ var MediaConverter = function(WORKFOLDER, path, watermarkPath) {
     console.log('MediaConverter');
     console.log(arguments);
 
+    var pattern = path + "/(*.png|*.jpg|*.jpeg|*.gif)";
+
+    console.log('pattern ' + pattern);
+
+
     EventEmitter.call(this);
 
     var watermarkImages = function() {
@@ -26,8 +31,7 @@ var MediaConverter = function(WORKFOLDER, path, watermarkPath) {
         var job = _.Deferred();
 
         var imagePath;
-
-        glob(path + "/*.(png|jpg|jpeg|gif)", function(er, files) {
+        glob(pattern, function(er, files) {
 
             console.log('globbed files');
             console.log(files);
