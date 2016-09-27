@@ -70,7 +70,9 @@ wf.on('watcherReady', function() {
     console.log('WatchFolder:watcherReady');
 
     Repo.createEmptyDir(DONE_PATH);
+    Repo.createEmptyDir(SAMPLE_PATH);
 
+if (DEBUG) {
     if (WIPE) {
         Repo.cleanTodo(TODO_PATH, function() {
             console.log('cleaned ' + TODO_PATH + ' mypath!');
@@ -83,7 +85,7 @@ wf.on('watcherReady', function() {
     } else {
         Repo.createDir(TODO_PATH, SAMPLE_PATH);
     }
-
+    }
 
 });
 
