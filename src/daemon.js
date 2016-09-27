@@ -11,8 +11,12 @@ var path = require('path');
 var DEBUG = false;
 var WIPE = false;
 
+
+
+
 // get the cueernt folder
-var WORKFOLDER = path.join(__dirname, "./../");
+//var WORKFOLDER = path.join(__dirname, "./../");
+var WORKFOLDER = path.dirname(require.main.filename);
 
 if (DEBUG) {
     WORKFOLDER = path.join(__dirname, "./test/");

@@ -1,6 +1,6 @@
 {
   "name": "imageoverlay",
-  "version": "0.3.8",
+  "version": "0.3.9",
   "description": "Simple command line utility to apply watermarks on images",
   "repository": {
     "type": "git",

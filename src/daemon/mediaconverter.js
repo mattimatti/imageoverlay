@@ -13,9 +13,11 @@ var sharp = require('sharp');
 var config = require('config');
 
 
-var MediaConverter = function(path) {
+var MediaConverter = function(WORKFOLDER,path) {
 
-    var watermarkPath = oPath.join(__dirname, "./../../") + config.get('watermark');
+
+
+    var watermarkPath = oPath.join(WORKFOLDER, config.get('watermark')) ;
     console.log(watermarkPath);
 
 
