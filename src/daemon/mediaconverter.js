@@ -12,11 +12,7 @@ _.mixin(_s.exports());
 var sharp = require('sharp');
 
 
-var MediaConverter = function(WORKFOLDER,path,watermarkPath) {
-
-
-
-   
+var MediaConverter = function(WORKFOLDER, path, watermarkPath) {
 
 
     EventEmitter.call(this);
@@ -26,7 +22,11 @@ var MediaConverter = function(WORKFOLDER,path,watermarkPath) {
         var job = _.Deferred();
 
         var imagePath;
-        glob(path + "/*.png", function(er, files) {
+        glob(path + "/*(png|jpg|jpeg|gif)", function(er, files) {
+
+            if (files.length <= 0) {
+                job.resolve();
+            }
             imagePath = files[0];
 
 

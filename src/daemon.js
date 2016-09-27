@@ -30,6 +30,7 @@ var SAMPLE_PATH = path.join(WORKFOLDER, 'sample');
 var INSTALL_SAMPLE_PATH = path.join(INSTALLFOLDER, 'sample');
 
 var WATERMARK_PATH = path.join(WORKFOLDER, "watermark.png");
+
 var INSTALL_WATERMARK_PATH = path.join(INSTALLFOLDER, "watermark.png");
 
 // show fancy
@@ -98,7 +99,8 @@ wf.on('watcherReady', function() {
 
     if (DEBUG) {
 
-        Repo.copyDir(INSTALL_SAMPLE_PATH, SAMPLE_PATH);
+        // the dir does not exist
+        //Repo.copyDir(INSTALL_SAMPLE_PATH, SAMPLE_PATH);
 
         if (WIPE) {
             Repo.cleanTodo(TODO_PATH, function() {
