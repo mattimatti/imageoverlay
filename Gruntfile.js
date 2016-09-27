@@ -74,6 +74,15 @@ module.exports = function(grunt) {
     },
 
 
+    nwjs: {
+    options: {
+        platforms: ['win64'],
+        buildDir: './webkitbuilds', // Where the build version of my NW.js app is saved
+    },
+    src: ['./package.json','./src/**/*','./config/**/*.json']
+  },
+
+
 
     changelog: {
       test: {
@@ -93,6 +102,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-conventional-changelog');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-jsonlint');
+  grunt.loadNpmTasks('grunt-nw-builder');
 
   // Default task.
   grunt.registerTask('default', ['jshint']);

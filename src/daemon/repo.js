@@ -27,6 +27,10 @@ function cleanTodo(TODO_PATH, cb) {
 }
 
 
+function createEmptyDir(TODO_PATH) {
+fs.mkdirs(TODO_PATH, function() {});
+}
+
 
 function createDir(TODO_PATH, SAMPLE_PATH) {
 
@@ -36,10 +40,11 @@ function createDir(TODO_PATH, SAMPLE_PATH) {
 
 	cleanTodo(TODO_PATH, function(err) {
 
-		var fldr_path = TODO_PATH + '/' + guid;
+		var fldr_path = TODO_PATH + '\\' + guid;
 
 		fs.mkdirs(fldr_path, function() {
 
+if(SAMPLE_PATH){
 			fs.copy(SAMPLE_PATH, fldr_path, function(err) {
 				
 				if (err) {
@@ -48,6 +53,8 @@ function createDir(TODO_PATH, SAMPLE_PATH) {
 
 				console.log('successfully copied to ' + fldr_path);
 			});
+
+			}
 
 		});
 
@@ -59,5 +66,6 @@ function createDir(TODO_PATH, SAMPLE_PATH) {
 module.exports = {
 	cleanDone: cleanDone,
 	cleanTodo: cleanTodo,
-	createDir: createDir
+	createDir: createDir,
+	createEmptyDir: createEmptyDir
 };

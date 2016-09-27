@@ -5,7 +5,6 @@
 
 var fs = require('fs-extra');
 var glob = require('glob');
-var exec = require('child_process').exec;
 var fileExists = require('file-exists');
 var oPath = require('path');
 var util = require('util');
@@ -16,62 +15,53 @@ var EventEmitter = events.EventEmitter;
 var _s = require("underscore.string");
 _.mixin(_s.exports());
 var sharp = require('sharp');
+var config = require('config');
 
 
 var MediaConverter = function(path) {
 
-    var startImage, endImage, watermarkedCount;
+    var watermarkPath =  oPath.join(__dirname, "./../../")+config.get('watermark');
+    console.log(watermarkPath);
+
 
     EventEmitter.call(this);
 
     var watermarkImages = function() {
 
-
-        watermarkedCount = 2;
-        console.log('watermarkImages path: ' + path);
-
         var job = _.Deferred();
 
-        var _innerAction = function() {
+var imagePath;
+        glob(path+"/*.png", function (er, files) {
+ imagePath = files[0];
 
-            var imageName;
 
-            var i;
-            var x = 1;
+        console.log('watermarkImages path: ' + imagePath);
+
+        var parts = oPath.parse(imagePath);
+        var imageDestPath = parts.dir + '/' + parts.name+'-done'  + parts.ext; 
+
+        
 
             var onDone = function(error, stdout, stderr) {
-                if (!error) {
-
-                    x++;
-
-                    console.log('applied watermark to ' + imageName);
-
-                    if (x === watermarkedCount) {
-                        job.resolve();
-                    }
-
-
-                } else {
-                    console.error(error);
-                }
+                    job.resolve();
             };
 
-            for (i = 1; i < watermarkedCount; i++) {
-                imageName = 'foto' + i + '.jpg';
-                var imagePath = path + '/' + imageName;
-                var imageDestPath = imagePath.replace('.jpg','-done.jpg');
-
-				sharp(imagePath)
-				  .resize(480, 480)
-				  .overlayWith(path + '/../../hashtag.png', { gravity: sharp.gravity.center } )
-				  .toFile(imageDestPath, onDone);
-            }
+       
+                sharp(imagePath)
+                  .overlayWith(watermarkPath, { gravity: sharp.gravity.center } )
+                  .toFile(imageDestPath, onDone);
 
 
 
-        };
+});
 
-        _innerAction();
+
+
+
+
+
+
+       
         return job;
     };
 

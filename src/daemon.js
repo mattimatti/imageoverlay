@@ -1,19 +1,23 @@
 var fs = require('fs-extra');
 var mkdirp = require('mkdirp');
 var config = require('config');
-var WatchFolder = require('./src/daemon/watchfolder.js');
-var MediaConverter = require('./src/daemon/mediaconverter.js');
-var Repo = require('./src/daemon/repo.js');
+var WatchFolder = require('./daemon/watchfolder.js');
+var MediaConverter = require('./daemon/mediaconverter.js');
+var Repo = require('./daemon/repo.js');
 var path = require('path');
 
 // Settings
-var DEBUG = true;
+var DEBUG = false;
 var WIPE = false;
 
 //var WORKFOLDER = config.get('workfolder');
 
 
-var WORKFOLDER = path.join(__dirname, "./test/");
+var WORKFOLDER = path.join(__dirname, "./../");
+
+    if(DEBUG){
+        WORKFOLDER = path.join(__dirname, "./test/");
+    }
 
 
 var TODO_PATH = WORKFOLDER + 'todo';
@@ -28,10 +32,6 @@ console.log('           IMGOVERLAY START                   ');
 console.log('');
 console.log('');
 console.log('==============================================');
-
-
-
-
 
 // Command line params
 if (process.argv[2]) {
@@ -66,7 +66,10 @@ wf.on('watcherReady', function() {
     console.log('watcherReady');
 
     // only if debug is active we cleanup the dropbox folders
-    if (DEBUG) {
+    //if (DEBUG) {
+
+         Repo.createEmptyDir(DONE_PATH);
+
         if (WIPE) {
             Repo.cleanTodo(TODO_PATH, function() {
                 console.log('cleaned ' + TODO_PATH + ' mypath!');
@@ -78,10 +81,9 @@ wf.on('watcherReady', function() {
 
         } else {
             Repo.createDir(TODO_PATH, SAMPLE_PATH);
-            Repo.createDir(DONE_PATH, SAMPLE_PATH);
         }
 
-    }
+   // }
 
 });
 
@@ -122,7 +124,7 @@ wf.on('folderIsReady', function(mypath, watcher) {
             console.log('Folder has been copied to ' + done_mypath);
             console.log('');
 
-            process.exit();
+            ///process.exit();
 
         });
 
