@@ -1,21 +1,23 @@
 {
   "name": "imageoverlay",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "description": "Simple command line utility to apply watermarks on images",
   "repository": {
     "type": "git",
     "url": "https://github.com/mattimatti/imageoverlay.git"
   },
-  "author": "matteo monti @mattimatti",
-  "license": "ISC",
+  "author": "matteo monti mmonti@gmail.com",
+  "license": "MOT",
   "bugs": {
     "url": "https://github.com/mattimatti/imageoverlay/issues"
   },
-   "engines": {
+  "engines": {
     "node": ">= 0.8.0"
   },
-"preferGlobal": "true",
-"bin" : { "imageoverlay" : "bin/imageoverlay" },
+  "preferGlobal": "true",
+  "bin": {
+    "imageoverlay": "bin/imageoverlay"
+  },
   "homepage": "https://github.com/mattimatti/imageoverlay",
   "devDependencies": {
     "grunt": "*",
@@ -26,6 +28,7 @@
     "grunt-conventional-changelog": "*",
     "grunt-docco": "*",
     "grunt-jsonlint": "*",
+    "grunt-npm": "0.0.2",
     "grunt-nw-builder": "^3.1.0",
     "grunt-todo": "*",
     "jshint-stylish": "*",
@@ -34,7 +37,6 @@
   },
   "dependencies": {
     "chokidar": "^1.5.1",
-    "package-script": "^0.0.3",
     "config": "^1.20.4",
     "crypto": "0.0.3",
     "file-exists": "^1.0.0",
