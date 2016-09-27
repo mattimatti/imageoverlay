@@ -27,7 +27,7 @@ var MediaConverter = function(WORKFOLDER, path, watermarkPath) {
 
         var imagePath;
 
-        glob(path + "/*(png|jpg|jpeg|gif)", function(er, files) {
+        glob(path + "/*.(png|jpg|jpeg|gif)", function(er, files) {
 
             console.log('globbed files');
             console.log(files);
