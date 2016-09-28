@@ -19,7 +19,7 @@ var MediaConverter = function(WORKFOLDER, path, watermarkPath) {
     console.log('MediaConverter');
     console.log(arguments);
 
-    var pattern = path + "/*.(png|jpg|jpeg|gif)";
+    var pattern = path + "/*(*.png|*.jpg|*.jpeg|*.gif)";
 
     console.log('pattern ' + pattern);
 
@@ -42,7 +42,7 @@ var MediaConverter = function(WORKFOLDER, path, watermarkPath) {
 
             if (files.length <= 0) {
                 console.error('no files found');
-                onDone();
+                job.reject();
                 return;
             }
 
@@ -55,17 +55,11 @@ var MediaConverter = function(WORKFOLDER, path, watermarkPath) {
             var imageDestPath = parts.dir + '/' + parts.name + '-done' + parts.ext;
 
 
-
-           
-
-
             sharp(imagePath)
                 .overlayWith(watermarkPath, {
                     gravity: sharp.gravity.center
                 })
                 .toFile(imageDestPath, onDone);
-
-
 
         });
 
