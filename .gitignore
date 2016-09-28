@@ -2,6 +2,8 @@
 .DS_Store
 logs
 /test
+/todo
+/done
 /cache
 /test/*
 npm-debug.log
