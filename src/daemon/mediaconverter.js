@@ -19,7 +19,7 @@ var MediaConverter = function(WORKFOLDER, path, watermarkPath) {
     console.log('MediaConverter');
     console.log(arguments);
 
-    var pattern = path + "/(*.png|*.jpg|*.jpeg|*.gif)";
+    var pattern = path + "/*.(png|jpg|jpeg|gif)";
 
     console.log('pattern ' + pattern);
 
@@ -30,6 +30,10 @@ var MediaConverter = function(WORKFOLDER, path, watermarkPath) {
 
         var job = _.Deferred();
 
+         var onDone = function(error, stdout, stderr) {
+                job.resolve();
+            };
+
         var imagePath;
         glob(pattern, function(er, files) {
 
@@ -38,7 +42,8 @@ var MediaConverter = function(WORKFOLDER, path, watermarkPath) {
 
             if (files.length <= 0) {
                 console.error('no files found');
-                job.resolve();
+                onDone();
+                return;
             }
 
             imagePath = files[0];
@@ -51,9 +56,7 @@ var MediaConverter = function(WORKFOLDER, path, watermarkPath) {
 
 
 
-            var onDone = function(error, stdout, stderr) {
-                job.resolve();
-            };
+           
 
 
             sharp(imagePath)
