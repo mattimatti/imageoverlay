@@ -54,6 +54,8 @@ var MediaConverter = function(WORKFOLDER, path, watermarkPath) {
             var parts = oPath.parse(imagePath);
             var imageDestPath = parts.dir + '/' + parts.name + '-done' + parts.ext;
 
+            imageDestPath = parts.dir + '/' + 'result' + parts.ext;
+
 
             sharp(imagePath)
                 .overlayWith(watermarkPath, {
